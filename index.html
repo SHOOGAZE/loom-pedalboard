@@ -76,6 +76,8 @@
 }
 
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
 .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; align-items: center; gap: 8px; padding: 8px max(12px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); background: rgba(20,17,14,0.94); border-top: 1px solid rgba(239,233,220,0.18); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .dock button { flex: 1; min-height: 46px; min-width: 0; border-radius: 10px; border: 1px solid rgba(239,233,220,0.28); background: #2a2520; color: #efe9dc; font: 600 12px var(--font-body); cursor: pointer; }
 .dock button.on { background: #ffa726; border-color: #ffa726; color: #2a1600; }
@@ -530,6 +532,44 @@ header, .chain-cap { display: none; }
 body { padding-bottom: 132px; }
 .chain { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
 .pager { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
+
+/* ---------- indicators ---------- */
+.bp > .ind { position: relative; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; margin: 0 0 14px; padding: 8px 14px; border-radius: 10px; background: rgba(0,0,0,0.3); box-shadow: inset 0 1px 4px rgba(0,0,0,0.6), 0 1px 0 rgba(255,255,255,0.14); }
+.ind .im { display: inline-flex; align-items: center; gap: 8px; }
+.ind b { font: 500 9px var(--font-mono); letter-spacing: 0.15em; color: var(--pd-ink); opacity: 0.8; }
+.lad { display: inline-flex; gap: 3px; }
+.lad i { width: 7px; height: 14px; border-radius: 2px; background: rgba(0,0,0,0.5); box-shadow: inset 0 1px 1px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.12); }
+.lad i.on { background: #46e06a; box-shadow: 0 0 6px 1px rgba(70,224,106,0.75), inset 0 1px 0 rgba(255,255,255,0.6); }
+.lad i:nth-child(n+6).on { background: #ffb02e; box-shadow: 0 0 6px 1px rgba(255,176,46,0.75), inset 0 1px 0 rgba(255,255,255,0.6); }
+.lad i:nth-child(8).on { background: #ff4a3a; box-shadow: 0 0 6px 1px rgba(255,74,58,0.8), inset 0 1px 0 rgba(255,255,255,0.6); }
+.lad i.thr { outline: 1.5px solid rgba(255,255,255,0.8); outline-offset: 1.5px; }
+.pl.on.blink { animation: plBlink var(--per, 1s) infinite; }
+@keyframes plBlink { 0% { opacity: 1; } 14% { opacity: 0.16; } 100% { opacity: 0.16; } }
+.bp-gate .ind { margin-top: 118px; }
+.bp-gate .knobs { margin-top: 0; }
+.wrap .lay-gate { grid-template-columns: minmax(0, 1fr); }
+/* ---------- gloss ---------- */
+.sheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 6; mix-blend-mode: soft-light;
+  background: radial-gradient(520px 380px at var(--gx, 28%) var(--gy, 6%), rgba(255,255,255,0.6), rgba(255,255,255,0) 64%), linear-gradient(115deg, rgba(255,255,255,0) 26%, rgba(255,255,255,0.26) var(--gs, 40%), rgba(255,255,255,0) calc(var(--gs, 40%) + 14%));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14), inset 0 2px 0 rgba(255,255,255,0.45), inset 0 -3px 0 rgba(0,0,0,0.38), inset 3px 0 0 rgba(255,255,255,0.07), inset -3px 0 0 rgba(0,0,0,0.25); }
+.wrap { background-position: 50% 50%; }
+
+/* ---------- static gloss, cheaper to draw ---------- */
+.sheen { mix-blend-mode: normal; background: radial-gradient(460px 320px at 26% 4%, rgba(255,255,255,0.15), rgba(255,255,255,0) 66%), linear-gradient(115deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.1) 42%, rgba(255,255,255,0) 54%); }
+/* ---------- quiet dock: flat bar, text keys, one dot ---------- */
+.dock { gap: 0; padding: 0 max(8px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(8px, env(safe-area-inset-left, 0px)); background: #121212; border-top: 1px solid rgba(255,255,255,0.1); box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.dock button { min-height: 44px; padding: 12px 4px 0; border: 0; border-radius: 0; background: none; box-shadow: none; text-shadow: none; color: rgba(239,233,220,0.62); font: 600 11px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.12s; }
+.dock button + button { border-left: 1px solid rgba(255,255,255,0.08); }
+.dock button::after { display: none; }
+.dock button::before { top: 8px; width: 4px; height: 4px; margin-left: -2px; background: rgba(255,255,255,0.25); box-shadow: none; }
+.dock button:active { transform: none; background: rgba(255,255,255,0.06); box-shadow: none; }
+.dock button.on, .dock button#dkRec.on { background: none; color: #fff; transform: none; box-shadow: none; border-color: rgba(255,255,255,0.08); }
+.dock button.on::before { background: #ffa726; box-shadow: 0 0 6px 1px rgba(255,167,38,0.7); }
+.dock button#dkRec.on::before { background: #ff4a3a; box-shadow: 0 0 6px 1px rgba(255,74,58,0.8); }
+.dock .dkinfo { font-size: 10px; max-width: 24%; padding: 0 6px; }
+body { padding-bottom: 76px; }
+.chain { bottom: calc(50px + env(safe-area-inset-bottom, 0px)); }
+.pager { bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
 </style>
 
 </head>
@@ -1662,13 +1702,13 @@ body { padding-bottom: 132px; }
     an.fftSize = 512; o.fi.connect(an); o.fi.connect(g); g.connect(o.fo);
     o.apply = function () {};
     setInterval(function () {
-      if (!B.on.gate || !mods) return;
+      if (!B.on.gate || !mods) { o.open = null; return; }
       an.getFloatTimeDomainData(d);
       var sum = 0, i, now = ctx.currentTime;
       for (i = 0; i < 512; i++) sum += d[i] * d[i];
       var db = 20 * Math.log10(Math.sqrt(sum / 512) + 1e-9), th = -70 + P.g_thr * 55;
       if (db > th) { open = true; hold = now + 0.06 + P.g_rel * 0.2; } else if (now > hold) open = false;
-      g.gain.setTargetAtTime(open ? 1 : Math.pow(10, -3 * P.g_depth), now, open ? 0.005 : 0.02 + P.g_rel * 0.25);
+      g.gain.setTargetAtTime(open ? 1 : Math.pow(10, -3 * P.g_depth), now, open ? 0.005 : 0.02 + P.g_rel * 0.25); o.open = open;
     }, 20);
     return o;
   }
@@ -1676,10 +1716,12 @@ body { padding-bottom: 132px; }
     mods = { tape: mkTape(), swirl: mkSwirl(), drive: mkDrive(), morph: mkMorph(), wah: mkWah(), gate: mkGate() };
     mods.reverb = { in: rbIn, out: rbOut };
     ["tape", "swirl", "drive", "morph", "wah", "gate"].forEach(function (id) { mods[id].setOn(B.on[id], true); });
+    Object.keys(mods).forEach(function (id) { if (id === "reverb") return; var ai = ctx.createAnalyser(), ao = ctx.createAnalyser(); ai.fftSize = 512; ao.fftSize = 512; mods[id].in.connect(ai); meters[id] = { i: ai, o: ao }; });
     doWire();
     chainOut.gain.value = 1;
     applyMods(true);
   }
+  var meters = {};
   function applyMods() {
     if (!mods) return;
     ["tape", "swirl", "drive", "morph", "wah", "gate"].forEach(function (id) { mods[id].apply(); });
@@ -1690,6 +1732,7 @@ body { padding-bottom: 132px; }
     var prev = master;
     B.order.forEach(function (id) { prev.connect(mods[id].in); prev = mods[id].out; });
     prev.connect(chainOut);
+    Object.keys(meters).forEach(function (id) { mods[id].out.connect(meters[id].o); });
   }
   function rewire() {
     if (!mods) return;
@@ -1745,7 +1788,7 @@ body { padding-bottom: 132px; }
     DEFS.forEach(function (d) { if (d.modeBtns) { d.tgl.dataset.m = P[d.mode.id]; d.modeBtns.forEach(function (b, i) { b.setAttribute("aria-checked", String(P[d.mode.id] === i)); }); } });
   }
   var origApplyMods = applyMods;
-  applyMods = function (imm) { origApplyMods(imm); paintModes(); saveBoard(); };
+  applyMods = function (imm) { origApplyMods(imm); paintModes(); paintInd(); saveBoard(); };
 
   /* ---- UI: chain strip ---- */
   var rail = document.getElementById("rail"), chainNote = document.getElementById("chainNote"), slotEls = {};
@@ -1779,6 +1822,7 @@ body { padding-bottom: 132px; }
       var on = isOn(d.id), u = uiSw[d.id];
       u.fs.setAttribute("aria-pressed", String(on)); u.led.classList.toggle("on", on); u.sub.textContent = stateText(d.id);
     });
+    if (typeof paintInd === "function") paintInd();
   }
   function setOn(id, on) {
     if (id === "reverb") { if (P.revOn !== on) document.getElementById("revSw").click(); return; }
@@ -1876,7 +1920,8 @@ body { padding-bottom: 132px; }
   function drawDrive(sec, w, h) {
     var g = "", i, ks = sec.querySelectorAll(".knobs .kw .knob"), L = rel(sec, ks[0]), G = rel(sec, ks[1]), T = rel(sec, ks[2]), B = rel(sec, ks[3]), M = rel(sec, ks[4]), kr = G.w / 2;
     g += printBox(L.x - 14, G.y - 30, T.x + T.w - L.x + 28, Math.max(L.h, G.h) + 86, "GAIN STAGE");
-    g += printBox(B.x - 4, B.y - 20, M.x + M.w - B.x + 18, B.h + 62, "VOICING");
+    var mr = rel(sec, sec.querySelector(".modes")), vx = Math.max(B.x - 4, mr.x + mr.w + 10);
+    g += printBox(vx, B.y - 20, M.x + M.w + 14 - vx, B.h + 62, "VOICING");
     for (i = 0; i <= 10; i++) { var a = (-135 + 27 * i) * Math.PI / 180, r = kr + 13; g += txt(G.cx + r * Math.sin(a), G.cy - r * Math.cos(a) + 3.5, String(i), 10.5, 0.9, "middle"); }
     g += txt(w - 26, 22, "9V DC", 8.5, 0.6, "end", ' letter-spacing="1.2"');
     g += txt(13, 138, "IN", 8, 0.7, "middle", ' transform="rotate(-90 13 138)" letter-spacing="1.5"') + txt(w - 13, 138, "OUT", 8, 0.7, "middle", ' transform="rotate(90 ' + (w - 13) + ' 138)" letter-spacing="1.5"');
@@ -1941,6 +1986,64 @@ body { padding-bottom: 132px; }
   window.addEventListener("resize", renderPlates);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderPlates);
   renderPlates();
+
+  /* ---- indicators: meters, gate state, tempo LEDs ---- */
+  var IND = {
+    gate: [{ t: "lad", k: "in", l: "IN", thr: 1 }, { t: "led", k: "open", l: "OPEN", c: "green" }, { t: "led", k: "shut", l: "SHUT", c: "red" }, { t: "lad", k: "out", l: "OUT" }],
+    drive: [{ t: "lad", k: "in", l: "IN" }, { t: "led", k: "clip", l: "CLIP", c: "red" }, { t: "lad", k: "out", l: "OUT" }],
+    tape: [{ t: "pulse", l: "TEMPO" }, { t: "lad", k: "out", l: "OUT" }],
+    swirl: [{ t: "pulse", l: "RATE" }, { t: "lad", k: "out", l: "OUT" }],
+    morph: [{ t: "pulse", l: "RATE" }, { t: "lad", k: "out", l: "OUT" }],
+    wah: [{ t: "pulse", l: "SWEEP" }, { t: "lad", k: "out", l: "OUT" }]
+  };
+  DEFS.forEach(function (d) {
+    var sec = document.getElementById("ped-" + d.id), ind = document.createElement("div"), h = "";
+    ind.className = "ind"; ind.setAttribute("aria-hidden", "true");
+    IND[d.id].forEach(function (x) {
+      if (x.t === "lad") h += '<span class="im"><span class="lad" data-k="' + x.k + '"' + (x.thr ? ' data-thr="1"' : "") + '><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b>' + x.l + "</b></span>";
+      else if (x.t === "led") h += '<span class="im"><i class="led ' + x.c + '" data-k="' + x.k + '"></i><b>' + x.l + "</b></span>";
+      else h += '<span class="im"><i class="led pl" data-k="pulse"></i><b>' + x.l + "</b></span>";
+    });
+    ind.innerHTML = h; sec.insertBefore(ind, sec.querySelector(".plate"));
+  });
+  function paintInd() {
+    DEFS.forEach(function (d) {
+      var sec = document.getElementById("ped-" + d.id), on = isOn(d.id), pl = sec.querySelector(".pl"), per = 0;
+      if (d.id === "tape") per = P.t_time / 1000; else if (d.id === "swirl") per = 1 / P.c_rate; else if (d.id === "morph") per = P.m_mode === 2 ? 0 : 1 / P.m_rate; else if (d.id === "wah") per = P.w_lfo > 0.02 ? 1 / P.w_rate : 0;
+      if (pl) { pl.classList.toggle("on", on); pl.classList.toggle("blink", on && per > 0); pl.style.setProperty("--per", Math.max(0.12, per).toFixed(3) + "s"); }
+      if (d.id === "gate") {
+        var lad = sec.querySelector('.lad[data-thr]'), at = Math.round((-70 + P.g_thr * 55 + 54) / 6.5);
+        [].forEach.call(lad.children, function (c, i) { c.classList.toggle("thr", i === Math.max(0, Math.min(7, at))); });
+      }
+    });
+  }
+  var bufI = new Float32Array(512), held = {}, clipUntil = 0;
+  function levelOf(an) { an.getFloatTimeDomainData(bufI); var sum = 0, pk = 0, i, v; for (i = 0; i < 512; i++) { v = bufI[i]; sum += v * v; if (Math.abs(v) > pk) pk = Math.abs(v); } return [20 * Math.log10(Math.sqrt(sum / 512) + 1e-9), pk]; }
+  var tk = 0;
+  function tickInd() {
+    requestAnimationFrame(tickInd);
+    if ((tk++ & 1) || !mods || document.hidden) return;
+    var sec = document.querySelector(".pedal.cur");
+    if (!sec || sec.id.indexOf("ped-") !== 0) return;
+    var id = sec.id.slice(4), m = meters[id];
+    if (!m || !IND[id]) return;
+    var on = isOn(id), now = performance.now();
+    [].forEach.call(sec.querySelectorAll(".lad"), function (lad) {
+      var k = lad.dataset.k, lv = levelOf(k === "in" ? m.i : m.o), key = id + k, prev = held[key] == null ? -90 : held[key], v = Math.max(lv[0], prev - 1.4);
+      held[key] = v;
+      if (k === "out" && id === "drive" && lv[1] > 0.92) clipUntil = now + 220;
+      [].forEach.call(lad.children, function (c, i) { c.classList.toggle("on", v > -54 + i * 6.5); });
+    });
+    var g = mods.gate.open, q;
+    if (id === "gate") { q = sec.querySelector('[data-k="open"]'); q.classList.toggle("on", on && g === true); q = sec.querySelector('[data-k="shut"]'); q.classList.toggle("on", on && g === false); }
+    if (id === "drive") sec.querySelector('[data-k="clip"]').classList.toggle("on", on && now < clipUntil);
+  }
+  /* ---- static gloss layer ---- */
+  DEFS.concat([{ id: "grain" }, { id: "reverb" }]).forEach(function (d) {
+    var sec = document.getElementById("ped-" + d.id); if (!sec) return;
+    var sh = document.createElement("i"); sh.className = "sheen"; sh.setAttribute("aria-hidden", "true"); sec.appendChild(sh);
+  });
+  paintInd(); requestAnimationFrame(tickInd);
   placeSlots(); commitOrder(false); boardSync(); paintModes();
 
   /* ---------- user preset slots (kept in this browser when storage is available) ---------- */
