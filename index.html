@@ -7,7 +7,7 @@
 <title>Grain Pedal</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=VT323&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=VT323&family=Playfair+Display:ital,wght@1,700&family=Stardos+Stencil:wght@700&family=Big+Shoulders+Stencil+Text:wght@800&display=swap">
 <style>
 /* ============ PEDAL KIT ============
    Adding a pedal later: (1) copy a <section class="pedal theme-..."> block, (2) pick or add a theme class below (7 variables),
@@ -618,7 +618,7 @@ body { padding-bottom: 76px; }
 .scenes button[aria-pressed="true"] { background: #d9412b; border-color: #d9412b; color: #fff; }
 .scenes button:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 /* ================= realism layer: one shared light model (top-left), per-theme material knobs ================= */
-:root { --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 -0.12'/></filter><rect width='160' height='160' filter='url(%23g)' opacity='0.9'/></svg>"); }
+:root { --tex: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 -0.12'/></filter><rect width='160' height='160' filter='url(%23g)' opacity='0.9'/></svg>"); }
 .pedal { --grain-o: .30; --gloss: .16; --rim: .5; }
 .pedal.theme-cosmic, .pedal.theme-gate, .pedal.theme-comp { --gloss: .26; --grain-o: .18; }
 .pedal.theme-silver, .pedal.theme-graphite, .pedal.theme-eq { --gloss: .10; --grain-o: .38; }
@@ -636,7 +636,7 @@ body { padding-bottom: 76px; }
 }
 .pedal::before {
   background:
-    var(--grain),
+    var(--tex),
     linear-gradient(180deg, rgba(255,255,255,calc(var(--gloss) * .9)) 0, rgba(255,255,255,0) 9%, rgba(255,255,255,0) 82%, rgba(0,0,0,.20) 100%),
     linear-gradient(118deg, rgba(255,255,255,0) 18%, rgba(255,255,255,var(--gloss)) 30%, rgba(255,255,255,0) 42%, rgba(255,255,255,0) 66%, rgba(255,255,255,calc(var(--gloss) * .5)) 73%, rgba(255,255,255,0) 84%),
     radial-gradient(130% 70% at 50% -10%, rgba(255,255,255,calc(var(--gloss) * 1.2)), rgba(255,255,255,0) 60%);
@@ -664,10 +664,10 @@ body { padding-bottom: 76px; }
   background: linear-gradient(90deg, #5d636a, #e6e9ec 28%, #f8f9fa 42%, #9aa1a8 70%, #5d636a); box-shadow: 0 -1px 0 rgba(0,0,0,.5), inset 0 -2px 2px rgba(0,0,0,.35); }
 .pedal > .jk::after { content: ""; position: absolute; left: 50%; top: -3px; width: 12px; height: 3px; margin-left: -6px; border-radius: 2px 2px 0 0; background: #1b1d20; box-shadow: 0 -1px 0 rgba(255,255,255,.2); }
 .pedal > .jk.a { left: 12%; } .pedal > .jk.b { left: 28%; } .pedal > .jk.c { left: 56%; width: 20px; }
-:root { --grain-soft: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.32 -0.04'/></filter><rect width='160' height='160' filter='url(%23g)'/></svg>"); }
+:root { --tex-soft: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.32 -0.04'/></filter><rect width='160' height='160' filter='url(%23g)'/></svg>"); }
 /* grain per material: enamel = smooth, powder coat = very fine */
-.pedal { --grain: none; }
-.pedal.theme-silver, .pedal.theme-graphite, .pedal.theme-eq, .pedal.theme-cream { --grain: var(--grain-soft); }
+.pedal { --tex: none; }
+.pedal.theme-silver, .pedal.theme-graphite, .pedal.theme-eq, .pedal.theme-cream { --tex: var(--tex-soft); }
 /* Drive: keep the VOICING pair centred in the space right of the mode switch */
 .wrap .lay-drive .kw:nth-child(4) { grid-area: 2 / 2; justify-self: center; transform: translateX(14px); }
 .wrap .lay-drive .kw:nth-child(5) { grid-area: 2 / 3; justify-self: center; transform: translateX(-4px); }
@@ -796,6 +796,154 @@ body {
 .pedal::after { content: none; background: none; }
 .wear { position: absolute; inset: 0; z-index: 0; pointer-events: none; border-radius: inherit; overflow: hidden; }
 .wear svg { position: absolute; left: 0; top: 0; display: block; }
+
+/* ================= screens: each with its own display technology ================= */
+/* Grain: blue-white OLED with a visible pixel grid */
+#ped-grain { --screen: #03060a; --screen-ink: #cfeaff; --grain: #9fdcff; }
+.p1 .window.screen { background: #03060a; box-shadow: inset 0 0 0 1px rgba(120,190,255,.16), inset 0 0 28px rgba(50,130,210,.24), 0 0 0 3px #0f1013, 0 0 0 5px #c4c8ce, 0 0 0 6px rgba(0,0,0,.5), 0 7px 9px 4px rgba(0,0,0,.3), 0 0 26px rgba(90,170,255,.16); }
+.p1 .window::after { background: repeating-linear-gradient(0deg, rgba(0,0,0,.34) 0 1px, rgba(0,0,0,0) 1px 3px), repeating-linear-gradient(90deg, rgba(0,0,0,.26) 0 1px, rgba(0,0,0,0) 1px 3px), radial-gradient(ellipse at 50% 30%, rgba(130,200,255,.14), rgba(0,0,0,0) 72%); }
+.p1 .screen-foot { border-top-color: rgba(140,200,255,.22); color: #9fd2f5; text-shadow: 0 0 5px rgba(110,190,255,.7); }
+/* Tail: red dot-matrix LED like a hardware effect display */
+#ped-reverb { --lcd: #060202; --lcd-ink: #ff4a38; }
+.p2 .window.lcd { background: #060202; box-shadow: inset 0 0 0 1px rgba(255,80,60,.2), inset 0 0 22px rgba(255,50,30,.2), 0 0 0 3px #0f0f11, 0 0 0 5px #c4c8ce, 0 0 0 6px rgba(0,0,0,.5), 0 7px 9px 4px rgba(0,0,0,.3), 0 0 24px rgba(255,60,40,.18); }
+.p2 .lcd .val { color: #ff4a38; text-shadow: 0 0 9px rgba(255,60,40,.85), 0 0 2px rgba(255,170,150,.9); }
+.p2 .lcd .cap { color: #ff8f78; opacity: .85; text-shadow: 0 0 5px rgba(255,70,50,.6); }
+.p2 .window.lcd::after { z-index: 3; background: radial-gradient(circle at center, rgba(0,0,0,0) 0 .8px, #050101 1.3px) 0 0 / 3px 3px; }
+.p2 canvas.irc { filter: none; }
+/* EQ: cool OLED curve; Scope: green LED matrix */
+.eqc { box-shadow: 0 0 0 3px #0f1012, 0 0 0 5px #b9bdc3, 0 0 0 6px rgba(0,0,0,.5), inset 0 0 22px rgba(60,150,230,.25), 0 8px 12px -4px rgba(0,0,0,.5), 0 0 22px rgba(80,170,255,.14); }
+.eqc #eqPath { stroke: #a8e4ff; filter: drop-shadow(0 0 3px #3cb8ff); }
+.eqc::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.3) 0 1px, rgba(0,0,0,0) 1px 3px), repeating-linear-gradient(90deg, rgba(0,0,0,.22) 0 1px, rgba(0,0,0,0) 1px 3px); }
+.scr::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at center, rgba(0,0,0,0) 0 .9px, rgba(2,6,3,.9) 1.4px) 0 0 / 3px 3px; }
+.scr { box-shadow: 0 0 0 3px #0f1012, 0 0 0 5px #b9bdc3, 0 0 0 6px rgba(0,0,0,.5), inset 0 0 26px rgba(40,200,90,.16), inset 0 2px 8px rgba(0,0,0,.7), 0 0 22px rgba(60,220,110,.12); }
+
+/* ================= hardware detail: knob washers, machined switches, chrome-bezel buttons ================= */
+.knob::before { content: ""; position: absolute; inset: 10%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, #060606 0 63%, rgba(0,0,0,0) 64%), conic-gradient(from 10deg, #6b7178, #e9ecef, #868c93, #dcdfe2, #6b7178, #e4e7ea, #868c93, #6b7178);
+  box-shadow: 0 1px 2px rgba(0,0,0,.65), inset 0 0 0 1px rgba(0,0,0,.35); }
+.p1 .knob::before { background: radial-gradient(circle, #060606 0 63%, rgba(0,0,0,0) 64%), conic-gradient(from 10deg, #7a5f26, #e6c777, #94742f, #dcbb68, #7a5f26, #e2c273, #94742f, #7a5f26); }
+.p2 .knob::before { background: radial-gradient(circle, #04050c 0 63%, rgba(0,0,0,0) 64%), conic-gradient(from 10deg, #4b5486, #c5cdf2, #5f6aa3, #b6bfe8, #4b5486, #c0c8ee, #5f6aa3, #4b5486); }
+.kcap::before { content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none; background: repeating-conic-gradient(rgba(255,255,255,.05) 0 .5deg, rgba(0,0,0,.05) .5deg 1deg); mix-blend-mode: normal; }
+.fs { background: radial-gradient(circle at 32% 24%, rgba(255,255,255,.95) 0, rgba(255,255,255,0) 34%), repeating-radial-gradient(circle at 50% 50%, #d3d8dc 0 1px, #b3b9bf 1px 2px), #b8bec4; }
+.key::before { background: radial-gradient(circle at 36% 26%, #8e9197, #32343a 52%, #121315); box-shadow: inset 0 2px 2px rgba(255,255,255,.45), inset 0 -3px 4px rgba(0,0,0,.5), 0 0 0 2px rgba(0,0,0,.6), 0 0 0 4px #b4b9bf, 0 0 0 5px rgba(0,0,0,.65), 0 5px 5px rgba(0,0,0,.5); }
+.key:active::before { box-shadow: inset 0 2px 4px rgba(0,0,0,.6), 0 0 0 2px rgba(0,0,0,.6), 0 0 0 4px #b4b9bf, 0 0 0 5px rgba(0,0,0,.65), 0 1px 2px rgba(0,0,0,.5); }
+/* ================= footswitches: no geometry change on press, only the cap's lighting ================= */
+.fs, .cfs, .key { -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.fs:focus:not(:focus-visible), .cfs:focus:not(:focus-visible), .key:focus:not(:focus-visible) { outline: none; }
+.fs { transform: none !important; transition: none;
+  background: radial-gradient(circle at 34% 24%, rgba(255,255,255,.95) 0, rgba(255,255,255,0) 38%), radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 56%, rgba(0,0,0,.24) 100%), repeating-radial-gradient(circle at 50% 50%, #dbdfe3 0 1px, #b7bdc3 1px 2px), #bcc2c8;
+  box-shadow: inset 0 2px 2px rgba(255,255,255,.95), inset 0 -5px 6px rgba(0,0,0,.34), 0 0 0 2px rgba(0,0,0,.55), 0 4px 5px rgba(0,0,0,.55); }
+.fs:active, .fs.pressing {
+  background: radial-gradient(circle at 50% 38%, rgba(255,255,255,.5) 0, rgba(255,255,255,0) 42%), radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 48%, rgba(0,0,0,.34) 100%), repeating-radial-gradient(circle at 50% 50%, #c5cace 0 1px, #a3a9af 1px 2px), #a8aeb4;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,.5), inset 0 -2px 3px rgba(255,255,255,.3), 0 0 0 2px rgba(0,0,0,.6), 0 1px 1px rgba(0,0,0,.5); }
+.fs::before { transition: none; }
+.fs:active::before, .fs.pressing::before { opacity: .35; }
+.fs::after { transform: none; }
+.hexw { filter: none; position: relative; }
+.hexw::before { content: ""; position: absolute; inset: 10% 2% -3%; border-radius: 50%; background: rgba(0,0,0,.5); filter: blur(5px); z-index: 0; pointer-events: none; }
+.hexw > .hex { position: relative; z-index: 1; }
+.cfs { transform: none !important; transition: none;
+  background: radial-gradient(circle at 34% 24%, rgba(255,255,255,.95) 0, rgba(255,255,255,0) 38%), repeating-radial-gradient(circle at 50% 50%, #dbdfe3 0 1px, #b7bdc3 1px 2px), #bcc2c8; }
+.cfs:active { background: radial-gradient(circle at 50% 38%, rgba(255,255,255,.5) 0, rgba(255,255,255,0) 42%), repeating-radial-gradient(circle at 50% 50%, #c5cace 0 1px, #a3a9af 1px 2px), #a8aeb4; box-shadow: inset 0 3px 5px rgba(0,0,0,.5), 0 0 0 3px rgba(0,0,0,.35), 0 0 0 4px #9aa0a7; }
+.key:active { transform: none; }
+.key:active::before { transform: none; }
+/* ================= palette + hardware taken from real pedals on a board ================= */
+.pedal.bp-swirl, .cslot[data-id="swirl"] { --pd-a: #f7d62e; --pd-b: #e4b610; --pd-edge: #7d5f04; --pd-ink: #15120a; --pd-muted: #3d3408; --pd-line: rgba(21,18,10,.42); --tick: rgba(21,18,10,.7); --arc: #c8180e; --led-off: #6a5810; --led-on: #ff3a2b; --pd-ts: 0 1px 0 rgba(255,255,255,.35); --pd-active: #15120a; }
+.pedal.bp-morph, .cslot[data-id="morph"] { --pd-a: #f48c28; --pd-b: #dc680c; --pd-edge: #6e2e04; --pd-ink: #180c04; --pd-muted: #4a2209; --pd-line: rgba(24,12,4,.42); --tick: rgba(24,12,4,.7); --arc: #fff0c8; --led-off: #7a3a0c; --led-on: #4cff7a; --pd-ts: 0 1px 0 rgba(255,255,255,.3); --pd-active: #180c04; }
+.pedal.bp-drive, .cslot[data-id="drive"] { --pd-a: #3cb862; --pd-b: #1e8c42; --pd-edge: #0b4520; --pd-ink: #f3f8ec; --pd-muted: #d3ebd2; --pd-line: rgba(243,248,236,.5); --tick: rgba(243,248,236,.75); --arc: #fff3a6; --led-off: #15532a; --led-on: #ff3a2b; --pd-ts: 0 1px 0 rgba(0,0,0,.35); --pd-active: #f3f8ec; }
+.pedal.bp-gate, .cslot[data-id="gate"] { --pd-a: #c92a22; --pd-b: #8c140f; --pd-edge: #380806; --pd-ink: #fff0e4; --pd-muted: #f0c3b2; --pd-line: rgba(255,236,222,.45); --tick: rgba(255,236,222,.7); --arc: #ffe9a0; --led-off: #4d1511; --led-on: #ff3a2b; --pd-ts: 0 1px 0 rgba(0,0,0,.45); --pd-active: #fff0e4; }
+.pedal.bp-wah, .cslot[data-id="wah"] { --pd-a: #d9dcdf; --pd-b: #b4b9be; --pd-edge: #6f757c; --pd-ink: #1d4f9e; --pd-muted: #3b69b4; --pd-line: rgba(29,79,158,.5); --tick: rgba(29,79,158,.7); --arc: #1d4f9e; --led-off: #5c6670; --led-on: #3aa0ff; --pd-ts: 0 1px 0 rgba(255,255,255,.75); --pd-active: #1d4f9e; }
+.pedal.bp-tape, .cslot[data-id="tape"] { --pd-a: #f0e4c6; --pd-b: #dac89c; --pd-edge: #8f7d52; --pd-ink: #18283a; --pd-muted: #455a70; --pd-line: rgba(24,40,58,.45); --tick: rgba(24,40,58,.7); --arc: #e0561a; --led-off: #7a6c4a; --led-on: #ff3a2b; --pd-ts: 0 1px 0 rgba(255,255,255,.6); --pd-active: #18283a; }
+.pedal.bp-comp, .cslot[data-id="comp"] { --pd-a: #f3ecda; --pd-b: #ddd2b4; --pd-edge: #968a68; --pd-ink: #121212; --pd-muted: #3d382d; --pd-line: rgba(18,18,18,.42); --tick: rgba(18,18,18,.7); --arc: #c8180e; --led-off: #7b7156; --led-on: #ff3a2b; --pd-ts: 0 1px 0 rgba(255,255,255,.6); --pd-active: #121212; }
+.pedal.bp-eq, .cslot[data-id="eq"] { --pd-a: #303031; --pd-b: #131314; --pd-edge: #050505; --pd-ink: #f3f3ef; --pd-muted: #b8b8b0; --pd-line: rgba(243,243,239,.38); --tick: rgba(243,243,239,.6); --arc: #ff4a3a; --led-off: #2a2a2b; --led-on: #ff3a2b; --pd-ts: 0 1px 0 rgba(0,0,0,.6); --pd-active: #f3f3ef; }
+#ped-reverb { --led-on: #4aa8ff; }
+#ped-grain { --led-on: #ffa726; }
+
+/* red crackle enamel for Gate */
+.pedal.bp-gate { --tex: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='c' x='0' y='0' width='100%' height='100%'><feTurbulence type='turbulence' baseFrequency='0.032' numOctaves='2' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.12  0 0 0 0 0.01  0 0 0 0 0  -22 0 0 0 1.35'/></filter><rect width='260' height='260' filter='url(%23c)'/></svg>"); }
+.pedal.bp-gate::before { background-size: 260px 260px, auto, auto, auto; }
+
+/* black cylinders with a white pointer (Swirl, Morph, Drive, Comp, EQ) */
+.pedal.bp-swirl .knob .kskirt, .pedal.bp-morph .knob .kskirt, .pedal.bp-drive .knob .kskirt, .pedal.bp-comp .knob .kskirt { display: block; background: radial-gradient(circle at 50% 50%, #0a0a0b 0 66%, #2b2c2f 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14), 0 1px 0 rgba(255,255,255,.1); }
+.pedal.bp-swirl .knob .kskirt::after, .pedal.bp-morph .knob .kskirt::after, .pedal.bp-drive .knob .kskirt::after, .pedal.bp-comp .knob .kskirt::after { background: conic-gradient(from -40deg, rgba(255,255,255,.28), rgba(255,255,255,0) 24%, rgba(0,0,0,.4) 54%, rgba(0,0,0,0) 74%, rgba(255,255,255,.16)); }
+.pedal.bp-swirl .knob .kcap, .pedal.bp-swirl .knob.main .kcap, .pedal.bp-morph .knob .kcap, .pedal.bp-morph .knob.main .kcap, .pedal.bp-drive .knob .kcap, .pedal.bp-drive .knob.main .kcap, .pedal.bp-comp .knob .kcap, .pedal.bp-comp .knob.main .kcap {
+  inset: 9%; clip-path: none; background: radial-gradient(circle at 32% 22%, rgba(255,255,255,.5) 0, rgba(255,255,255,0) 38%), radial-gradient(circle at 50% 50%, #232427, #0a0a0c 78%); box-shadow: inset 0 1.5px 1px rgba(255,255,255,.3), inset 0 -3px 5px rgba(0,0,0,.65), 0 0 0 1px rgba(0,0,0,.7); }
+.pedal.bp-swirl .knob .kcap::after, .pedal.bp-morph .knob .kcap::after, .pedal.bp-drive .knob .kcap::after, .pedal.bp-comp .knob .kcap::after { display: none; }
+.pedal.bp-swirl .knob .kind::before, .pedal.bp-morph .knob .kind::before, .pedal.bp-drive .knob .kind::before, .pedal.bp-comp .knob .kind::before { top: 11%; width: 3px; height: 24%; margin-left: -1.5px; border-radius: 1px; clip-path: none; background: #f6f6f1; box-shadow: none; }
+/* cream chicken-heads (Wah, Gate) */
+.pedal.bp-wah .knob .kskirt, .pedal.bp-gate .knob .kskirt { display: block; background: radial-gradient(circle at 34% 26%, #fffdf3, #e9e1c8 58%, #b4a984); box-shadow: inset 0 0 0 1px rgba(0,0,0,.25), 0 1px 0 rgba(255,255,255,.2); }
+.pedal.bp-wah .knob .kskirt::after, .pedal.bp-gate .knob .kskirt::after { background: conic-gradient(from -30deg, rgba(255,255,255,.4), rgba(255,255,255,0) 26%, rgba(0,0,0,.18) 56%, rgba(0,0,0,0) 76%); }
+.pedal.bp-wah .knob .kcap, .pedal.bp-wah .knob.main .kcap, .pedal.bp-gate .knob .kcap, .pedal.bp-gate .knob.main .kcap { inset: 18%; background: radial-gradient(circle at 34% 24%, #fff, #ece4cc 62%, #bdb28e); box-shadow: inset 0 1px 1px rgba(255,255,255,.9), inset 0 -2px 4px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.25); }
+.pedal.bp-wah .knob .kcap::after, .pedal.bp-gate .knob .kcap::after { display: none; }
+.pedal.bp-wah .knob .kind::before, .pedal.bp-gate .knob .kind::before { top: -4%; width: 22px; height: 52%; margin-left: -11px; border-radius: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%); background: linear-gradient(90deg, #f3ebd2 0 44%, #2a2418 44% 56%, #f3ebd2 56%); box-shadow: none; filter: drop-shadow(0 1px 1px rgba(0,0,0,.55)); }
+/* teal gloss (Tape) */
+.pedal.bp-tape .knob .kskirt { background: radial-gradient(circle at 34% 24%, #86e6ec, #139aa6 56%, #07555e); box-shadow: inset 0 0 0 1px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.25); }
+.pedal.bp-tape .knob .kskirt::after { background: conic-gradient(from -40deg, rgba(255,255,255,.4), rgba(255,255,255,0) 24%, rgba(0,0,0,.3) 54%, rgba(0,0,0,0) 74%); }
+.pedal.bp-tape .knob .kcap, .pedal.bp-tape .knob.main .kcap { inset: 14%; background: radial-gradient(circle at 34% 22%, rgba(255,255,255,.7), rgba(255,255,255,0) 42%), radial-gradient(circle at 50% 50%, #1fb3bf, #0c6f78 80%); box-shadow: inset 0 1.5px 1px rgba(255,255,255,.6), inset 0 -3px 5px rgba(0,0,0,.4), 0 0 0 1px rgba(0,0,0,.4); }
+.pedal.bp-tape .knob .kcap::after { display: none; }
+.pedal.bp-tape .knob .kind::before { top: 12%; width: 3px; height: 26%; margin-left: -1.5px; background: #fff; box-shadow: 0 0 0 .5px rgba(0,0,0,.3); }
+.pedal.bp-tape .knob::before { background: radial-gradient(circle, #060606 0 63%, rgba(0,0,0,0) 64%), conic-gradient(from 10deg, #8a8f95, #eef0f2, #a3a8ad, #e6e8ea, #8a8f95); }
+
+/* ================= indicators: bezel LEDs with a real lens, glow in the lamp's own colour ================= */
+.led { width: 13px; height: 13px; background: radial-gradient(circle at 34% 28%, rgba(255,255,255,.55) 0, rgba(255,255,255,0) 24%), radial-gradient(circle, color-mix(in srgb, var(--led-on) 24%, #141010), color-mix(in srgb, var(--led-on) 8%, #000) 100%); box-shadow: inset 0 0 0 1.5px rgba(0,0,0,.6), 0 0 0 2.5px #aeb3b9, 0 0 0 3.5px rgba(0,0,0,.65), 0 2px 2px rgba(0,0,0,.45); }
+.led::before { display: none; }
+.led.on { background: radial-gradient(circle at 34% 28%, #fff 0, rgba(255,255,255,0) 30%), radial-gradient(circle, color-mix(in srgb, var(--led-on) 40%, #fff) 0, var(--led-on) 58%, color-mix(in srgb, var(--led-on) 72%, #000) 100%); box-shadow: inset 0 0 0 1.5px rgba(0,0,0,.3), 0 0 0 2.5px #aeb3b9, 0 0 0 3.5px rgba(0,0,0,.65), 0 0 12px 3px color-mix(in srgb, var(--led-on) 85%, transparent); }
+.led.on::after { background: radial-gradient(circle, color-mix(in srgb, var(--led-on) 55%, transparent), rgba(0,0,0,0) 66%); }
+.led.red { --led-on: #ff3a2b; } .led.green { --led-on: #46f07a; }
+.led.on.red { background: radial-gradient(circle at 34% 28%, #fff 0, rgba(255,255,255,0) 30%), radial-gradient(circle, #ffb0a6 0, #ff3a2b 58%, #a01208 100%); box-shadow: inset 0 0 0 1.5px rgba(0,0,0,.3), 0 0 0 2.5px #aeb3b9, 0 0 0 3.5px rgba(0,0,0,.65), 0 0 12px 3px rgba(255,58,43,.85); }
+.led.on.green { background: radial-gradient(circle at 34% 28%, #fff 0, rgba(255,255,255,0) 30%), radial-gradient(circle, #c6ffd5 0, #46f07a 58%, #12802f 100%); box-shadow: inset 0 0 0 1.5px rgba(0,0,0,.3), 0 0 0 2.5px #aeb3b9, 0 0 0 3.5px rgba(0,0,0,.65), 0 0 12px 3px rgba(70,240,122,.85); }
+.ind .led { width: 10px; height: 10px; box-shadow: inset 0 0 0 1.2px rgba(0,0,0,.6), 0 0 0 2px #9aa0a6, 0 0 0 3px rgba(0,0,0,.6); }
+.ind .led.on { box-shadow: inset 0 0 0 1.2px rgba(0,0,0,.3), 0 0 0 2px #9aa0a6, 0 0 0 3px rgba(0,0,0,.6), 0 0 10px 2px var(--led-on); }
+/* EQ: a red LED over each slider, brighter the further the band is pushed or cut */
+.fled { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #3b0c08; box-shadow: inset 0 0 0 1px #000, 0 0 0 2px #8f949a, 0 0 0 3px rgba(0,0,0,.6); margin-bottom: 4px; }
+.fled::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffe0da, #ff3a2a 55%, #a01208); opacity: var(--b, 0); }
+.fled::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; background: radial-gradient(circle, rgba(255,58,43,.85), rgba(255,58,43,0) 68%); opacity: calc(var(--b, 0) * .9); pointer-events: none; }
+.bp-eq .fcap { background: linear-gradient(#f4f5f6, #b9bec3 46%, #84898f 54%, #d4d8db); }
+/* ================= boutique layer: new palettes, real knob families, brand art ================= */
+.pedal.bp-drive, .cslot[data-id="drive"] { --pd-a: #3d4396; --pd-b: #232868; --pd-edge: #0b0e33; --pd-ink: #f2e8c9; --pd-muted: #cbc5e3; --pd-line: rgba(242,232,201,.45); --tick: rgba(242,232,201,.72); --arc: #ffd36a; --led-off: #171b4e; --led-on: #ff3a2b; --pd-ts: 0 1px 0 rgba(0,0,0,.4); --pd-active: #f2e8c9; }
+.pedal.bp-tape, .cslot[data-id="tape"] { --pd-a: #aee0cc; --pd-b: #80c6ad; --pd-edge: #3a7b66; --pd-ink: #12382e; --pd-muted: #2c6254; --pd-line: rgba(18,56,46,.42); --tick: rgba(18,56,46,.7); --arc: #e0561a; --led-off: #3a7b66; --led-on: #ff3a2b; --pd-ts: 0 1px 0 rgba(255,255,255,.4); --pd-active: #12382e; }
+
+/* textured metallic: horizontal brushing on Wah */
+.pedal.bp-wah { --tex: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='b' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='0.004 0.7' numOctaves='3' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 -.14'/></filter><rect width='240' height='240' filter='url(%23b)'/></svg>"); }
+.pedal.bp-wah::before { background-size: 240px 240px, auto, auto, auto; }
+.pedal.bp-tape { --tex: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='m' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='3' seed='9' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1  0 0 0 0 .25  0 0 0 0 .2  0 0 0 .5 -.12'/></filter><rect width='200' height='200' filter='url(%23m)'/></svg>"); }
+.pedal.bp-tape::before { background-size: 200px 200px, auto, auto, auto; }
+
+/* ---- knob families: body, ribs and light are static; only .kind (the marker) turns ---- */
+.knob .kind::before { content: ""; }
+.pedal.bp-tape .knob .kskirt, .pedal.bp-morph .knob .kskirt, #ped-grain .knob .kskirt, #ped-reverb .knob .kskirt, .pedal.bp-drive .knob .kskirt, .pedal.bp-comp .knob .kskirt, .pedal.bp-wah .knob .kskirt, .pedal.bp-gate .knob .kskirt, .pedal.bp-swirl .knob .kskirt { display: block; }
+.pedal.bp-tape .knob .kcap, .pedal.bp-tape .knob.main .kcap, .pedal.bp-morph .knob .kcap, .pedal.bp-morph .knob.main .kcap, #ped-grain .knob .kcap, #ped-grain .knob.main .kcap, #ped-reverb .knob .kcap, #ped-reverb .knob.main .kcap, .pedal.bp-drive .knob .kcap, .pedal.bp-drive .knob.main .kcap, .pedal.bp-comp .knob .kcap, .pedal.bp-comp .knob.main .kcap, .pedal.bp-wah .knob .kcap, .pedal.bp-wah .knob.main .kcap, .pedal.bp-gate .knob .kcap, .pedal.bp-gate .knob.main .kcap, .pedal.bp-swirl .knob .kcap, .pedal.bp-swirl .knob.main .kcap { clip-path: none; filter: none; }
+.pedal.bp-tape .knob .kcap::after, .pedal.bp-morph .knob .kcap::after, #ped-grain .knob .kcap::after, #ped-reverb .knob .kcap::after, .pedal.bp-drive .knob .kcap::after, .pedal.bp-comp .knob .kcap::after, .pedal.bp-wah .knob .kcap::after, .pedal.bp-gate .knob .kcap::after, .pedal.bp-swirl .knob .kcap::after { display: block; content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none; }
+.pedal.bp-tape .knob .kcap::before, .pedal.bp-morph .knob .kcap::before, #ped-grain .knob .kcap::before, #ped-reverb .knob .kcap::before, .pedal.bp-drive .knob .kcap::before, .pedal.bp-comp .knob .kcap::before, .pedal.bp-wah .knob .kcap::before, .pedal.bp-gate .knob .kcap::before, .pedal.bp-swirl .knob .kcap::before { display: none; }
+.pedal.bp-tape .knob .kind::before, .pedal.bp-morph .knob .kind::before, #ped-grain .knob .kind::before, #ped-reverb .knob .kind::before, .pedal.bp-drive .knob .kind::before, .pedal.bp-comp .knob .kind::before, .pedal.bp-wah .knob .kind::before, .pedal.bp-gate .knob .kind::before, .pedal.bp-swirl .knob .kind::before { clip-path: none; filter: none; border-radius: 2px; background: #fff; box-shadow: 0 0 0 1.5px rgba(0,0,0,.85), 0 0 5px 1px rgba(255,255,255,.5); margin-left: -2px; width: 4px; }
+.pedal.bp-tape .knob .kind::after, .pedal.bp-morph .knob .kind::after, #ped-grain .knob .kind::after, #ped-reverb .knob .kind::after, .pedal.bp-drive .knob .kind::after, .pedal.bp-comp .knob .kind::after, .pedal.bp-wah .knob .kind::after, .pedal.bp-gate .knob .kind::after, .pedal.bp-swirl .knob .kind::after { content: none; }
+.pedal.bp-tape .knob .kskirt, .pedal.bp-morph .knob .kskirt, #ped-grain .knob .kskirt, #ped-reverb .knob .kskirt { background: radial-gradient(circle closest-side, var(--dv-wall) 0 83.5%, rgba(0,0,0,0) 84%), repeating-conic-gradient(var(--dv-r1) 0 2deg, var(--dv-r2) 2deg 3.3deg, var(--dv-r1) 3.3deg 6deg), var(--dv-wall); box-shadow: inset 0 0 0 1px rgba(0,0,0,.6); }
+.pedal.bp-tape .knob .kskirt::after, .pedal.bp-morph .knob .kskirt::after, #ped-grain .knob .kskirt::after, #ped-reverb .knob .kskirt::after { background: conic-gradient(from -55deg, rgba(255,230,200,.42), rgba(255,230,200,0) 22%, rgba(0,0,0,.5) 54%, rgba(0,0,0,0) 78%, rgba(255,230,200,.22)); }
+.pedal.bp-tape .knob .kcap, .pedal.bp-tape .knob.main .kcap, .pedal.bp-morph .knob .kcap, .pedal.bp-morph .knob.main .kcap, #ped-grain .knob .kcap, #ped-grain .knob.main .kcap, #ped-reverb .knob .kcap, #ped-reverb .knob.main .kcap { inset: 19%; background: var(--dv-face); box-shadow: inset 0 0 0 1px rgba(0,0,0,.5), inset 1px 1px 0 rgba(255,255,255,.22); }
+.pedal.bp-tape .knob .kcap::after, .pedal.bp-morph .knob .kcap::after, #ped-grain .knob .kcap::after, #ped-reverb .knob .kcap::after { background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.34), rgba(255,255,255,0) 52%), radial-gradient(circle at 72% 82%, rgba(0,0,0,.32), rgba(0,0,0,0) 62%); }
+.pedal.bp-tape .knob .kind::before, .pedal.bp-morph .knob .kind::before, #ped-grain .knob .kind::before, #ped-reverb .knob .kind::before { top: 29%; height: 18%; width: 4px; margin-left: -2px; background: var(--dv-mk); box-shadow: 0 0 0 1.5px var(--dv-mko), 0 0 5px 1px rgba(255,255,255,.35); }
+.pedal.bp-tape .knob .kind::after, .pedal.bp-morph .knob .kind::after, #ped-grain .knob .kind::after, #ped-reverb .knob .kind::after { content: ""; position: absolute; left: 50%; top: 14.5%; width: 5px; height: 4.5%; margin-left: -2.5px; border-radius: 2px; background: var(--dv-mk); box-shadow: 0 0 0 1.5px var(--dv-mko); }
+.pedal.bp-tape, .pedal.bp-grain, #ped-grain, #ped-reverb { }
+.pedal.bp-tape { --dv-wall: #1d1a17; --dv-face: #2b2723; --dv-r1: #0a0908; --dv-r2: #4d4741; --dv-mk: #fff; --dv-mko: rgba(0,0,0,.85); }
+.pedal.bp-morph { --dv-wall: #e6dcc0; --dv-face: #f3ebd4; --dv-r1: #a89c78; --dv-r2: #fff7e2; --dv-mk: #1a1207; --dv-mko: rgba(255,255,255,.8); }
+#ped-grain { --dv-wall: #46301b; --dv-face: #684528; --dv-r1: #241408; --dv-r2: #8c6339; --dv-mk: #fff8e6; --dv-mko: rgba(0,0,0,.85); }
+#ped-reverb { --dv-wall: #141a46; --dv-face: #25307a; --dv-r1: #090d2a; --dv-r2: #5463bc; --dv-mk: #eaf1ff; --dv-mko: rgba(0,0,10,.85); }
+.pedal.bp-drive .knob .kskirt, .pedal.bp-comp .knob .kskirt { background: #151516; box-shadow: inset 0 0 0 1px rgba(0,0,0,.7), 0 1px 0 rgba(255,255,255,.1); }
+.pedal.bp-drive .knob .kskirt::after, .pedal.bp-comp .knob .kskirt::after { background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.14), rgba(255,255,255,0) 50%), conic-gradient(from -50deg, rgba(255,255,255,.16), rgba(255,255,255,0) 24%, rgba(0,0,0,.45) 54%, rgba(0,0,0,0) 78%, rgba(255,255,255,.1)); box-shadow: inset 1px 1px 0 rgba(255,255,255,.14), inset -1px -1px 0 rgba(0,0,0,.5); }
+.pedal.bp-drive .knob .kcap, .pedal.bp-drive .knob.main .kcap, .pedal.bp-comp .knob .kcap, .pedal.bp-comp .knob.main .kcap { inset: 17%; background: repeating-conic-gradient(#aeb3b8 0 .6deg, #d4d8db .6deg 1.2deg); box-shadow: inset 0 0 0 1px rgba(0,0,0,.55), 0 0 0 2px rgba(0,0,0,.5); }
+.pedal.bp-drive .knob .kcap::after, .pedal.bp-comp .knob .kcap::after { background: conic-gradient(from 25deg, rgba(255,255,255,.75), rgba(255,255,255,0) 18%, rgba(0,0,0,.42) 42%, rgba(0,0,0,0) 58%, rgba(255,255,255,.55) 78%, rgba(255,255,255,.75)); box-shadow: inset 1.5px 1.5px 1px rgba(255,255,255,.7), inset -1.5px -1.5px 2px rgba(0,0,0,.4); }
+.pedal.bp-drive .knob .kind::before, .pedal.bp-comp .knob .kind::before { top: 16.5%; height: 8.5%; width: 4.5px; margin-left: -2.25px; }
+.pedal.bp-wah .knob .kskirt, .pedal.bp-gate .knob .kskirt { background: radial-gradient(circle closest-side, #232427 0 72%, rgba(0,0,0,0) 73%), repeating-conic-gradient(#040405 0deg, #3a3b40 1.8deg, #15161a 3.2deg, #040405 6deg), #232427; box-shadow: inset 0 0 0 1px rgba(0,0,0,.7); }
+.pedal.bp-wah .knob .kskirt::after, .pedal.bp-gate .knob .kskirt::after { background: conic-gradient(from -55deg, rgba(255,255,255,.4), rgba(255,255,255,0) 22%, rgba(0,0,0,.55) 54%, rgba(0,0,0,0) 78%, rgba(255,255,255,.22)); }
+.pedal.bp-wah .knob .kcap, .pedal.bp-wah .knob.main .kcap, .pedal.bp-gate .knob .kcap, .pedal.bp-gate .knob.main .kcap { inset: 22%; background: #17181a; box-shadow: inset 0 0 0 1px rgba(0,0,0,.6), inset 1px 1px 0 rgba(255,255,255,.1); }
+.pedal.bp-wah .knob .kcap::after, .pedal.bp-gate .knob .kcap::after { background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.18), rgba(255,255,255,0) 55%); }
+.pedal.bp-wah .knob .kind::before, .pedal.bp-gate .knob .kind::before { top: 17.5%; height: 9%; width: 4.5px; margin-left: -2.25px; }
+.pedal.bp-swirl .knob .kskirt { background: repeating-conic-gradient(#060606 0 1.4deg, #46474b 1.4deg 2.8deg); box-shadow: inset 0 0 0 1px rgba(0,0,0,.7); }
+.pedal.bp-swirl .knob .kskirt::after { background: conic-gradient(from -55deg, rgba(255,255,255,.45), rgba(255,255,255,0) 22%, rgba(0,0,0,.55) 54%, rgba(0,0,0,0) 78%, rgba(255,255,255,.25)); }
+.pedal.bp-swirl .knob .kcap, .pedal.bp-swirl .knob.main .kcap { inset: 14%; background: #1b1b1d; box-shadow: inset 0 0 0 1px rgba(0,0,0,.6), inset 1px 1px 0 rgba(255,255,255,.2); }
+.pedal.bp-swirl .knob .kcap::after { background: radial-gradient(circle at 30% 24%, rgba(255,255,255,.3), rgba(255,255,255,0) 56%); }
+.pedal.bp-swirl .knob .kind::before { top: 19%; height: 19%; width: 4px; margin-left: -2px; }
+
 </style>
 
 </head>
@@ -1532,7 +1680,7 @@ body {
   /* ---------- screens ---------- */
   var cv = document.getElementById("wave"), g2 = cv.getContext("2d"), tiles = [].slice.call(document.querySelectorAll(".tile"));
   var irCv = document.getElementById("irCv"), g3 = irCv.getContext("2d");
-  function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  function css(n, el) { return getComputedStyle(el || document.documentElement).getPropertyValue(n).trim(); }
   function resize() { var r = cv.getBoundingClientRect(), dpr = window.devicePixelRatio || 1; cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); }
   window.addEventListener("resize", resize); resize();
 
@@ -1540,7 +1688,7 @@ body {
     var W = irCv.width, H = irCv.height, d = ir.getChannelData(0), bins = 42, step = Math.floor(d.length / bins), pk = [], mx = 0.0001, i, j;
     for (i = 0; i < bins; i++) { var m = 0; for (j = i * step; j < (i + 1) * step; j += 3) { var v = Math.abs(d[j]); if (v > m) m = v; } pk.push(m); if (m > mx) mx = m; }
     g3.clearRect(0, 0, W, H);
-    g3.fillStyle = css("--lcd-ink") || "#8cff3d";
+    g3.fillStyle = css("--lcd-ink", document.getElementById("ped-reverb")) || "#8cff3d";
     var bw = W / bins;
     for (i = 0; i < bins; i++) { var h = Math.max(2, Math.pow(pk[i] / mx, 0.6) * (H - 6)); g3.globalAlpha = 0.9; g3.fillRect(i * bw + 1, H - h, Math.max(1, bw - 2), h); }
     g3.globalAlpha = 1;
@@ -1549,7 +1697,7 @@ body {
 
   function draw() {
     var W = cv.width, H = cv.height, dpr = window.devicePixelRatio || 1;
-    var grain = css("--grain"), ink = css("--screen-ink"), line = css("--p1-line"), scr = css("--screen");
+    var pg = document.getElementById("ped-grain"), grain = css("--grain", pg), ink = css("--screen-ink", pg), line = css("--p1-line", pg), scr = css("--screen", pg);
     g2.clearRect(0, 0, W, H);
     g2.fillStyle = scr; g2.fillRect(0, 0, W, H);
     g2.strokeStyle = ink; g2.globalAlpha = 0.25; g2.lineWidth = dpr;
@@ -2237,7 +2385,7 @@ body {
   function drawGate(sec, w, h) {
     var hd = sec.querySelector(".bp-head").getBoundingClientRect(), sc = sec.getBoundingClientRect(), r = rnd(7), g = "", d = "", i;
     var x0 = 26, x1 = w - 26, H = 100, y0 = hd.bottom - sc.top + 12, yc = y0 + H / 2, n = Math.round((x1 - x0) / 2.5);
-    g += '<rect x="' + f1(x0) + '" y="' + f1(y0) + '" width="' + f1(x1 - x0) + '" height="' + H + '" rx="9" fill="#000" fill-opacity="0.4" stroke="currentColor" stroke-opacity="0.65" stroke-width="1.4"/>';
+    g += '<rect x="' + f1(x0) + '" y="' + f1(y0) + '" width="' + f1(x1 - x0) + '" height="' + H + '" rx="9" fill="#020a05" fill-opacity="0.92" stroke="#0b0d0c" stroke-width="3"/><rect x="' + f1(x0 - 3) + '" y="' + f1(y0 - 3) + '" width="' + f1(x1 - x0 + 6) + '" height="' + (H + 6) + '" rx="11" fill="none" stroke="#aeb3b9" stroke-opacity=".75" stroke-width="1.2"/><g style="color:#79ff9c">';
     for (i = 1; i < 8; i++) g += line(x0 + (x1 - x0) * i / 8, y0 + 5, x0 + (x1 - x0) * i / 8, y0 + H - 5, 1, 0.13);
     g += line(x0 + 6, yc, x1 - 6, yc, 1, 0.2) + line(x0 + 6, yc - 16, x1 - 6, yc - 16, 1.2, 0.7, ' stroke-dasharray="5 4"') + line(x0 + 6, yc + 16, x1 - 6, yc + 16, 1.2, 0.7, ' stroke-dasharray="5 4"');
     g += owl((x0 + x1) / 2, yc - 3, 0.95);
@@ -2245,18 +2393,65 @@ body {
       var t = i / n, hiss = t < 0.7 ? 6 : t < 0.76 ? 6 * (0.76 - t) / 0.06 : 0.7, env = t > 0.3 && t < 0.7 ? Math.sin(Math.PI * (t - 0.3) / 0.4) : 0;
       d += (i ? "L" : "M") + f1(x0 + 8 + (x1 - x0 - 16) * t) + " " + f1(yc + env * 32 * Math.sin(t * 150) + (r() * 2 - 1) * hiss);
     }
-    g += '<path d="' + d + '" fill="none" stroke="var(--arc)" stroke-width="1.5" stroke-linejoin="round" stroke-opacity="0.95"/>';
+    g += '<path d="' + d + '" fill="none" stroke="#38ff7a" stroke-width="5" stroke-linejoin="round" stroke-opacity="0.22"/><path d="' + d + '" fill="none" stroke="#a6ffc0" stroke-width="1.4" stroke-linejoin="round" stroke-opacity="0.98"/>';
     g += txt(x0 + 12, y0 + 16, "THRESHOLD", 9, 0.85, "start", ' letter-spacing="1.6"') + txt(x0 + 12, y0 + H - 9, "HISS", 9, 0.7, "start", ' letter-spacing="1.6"') + txt(x1 - 12, y0 + H - 9, "SHUT", 9, 0.7, "end", ' letter-spacing="1.6"');
-    g += txt(w - 26, 22, "NOISE GATE", 8.5, 0.6, "end", ' letter-spacing="1.4"');
+    g += "</g>"; g += txt(w - 26, 22, "NOISE GATE", 8.5, 0.6, "end", ' letter-spacing="1.4"');
     return g;
   }
   function drawComp(sec, w, h) { return txt(w - 26, h - 14, "COMPRESSOR", 8.5, 0.6, "end", ' letter-spacing="1.4"') + txt(26, h - 14, "SUSTAIN · ATTACK", 8, 0.55, "start", ' letter-spacing="1.4"'); }
   function drawEq(sec, w, h) { return txt(w - 26, 22, "6-BAND", 8.5, 0.6, "end", ' letter-spacing="1.4"'); }
   var DRAW = { comp: drawComp, eq: drawEq, tape: drawTape, swirl: drawSwirl, drive: drawDrive, morph: drawMorph, wah: drawWah, gate: drawGate };
+
+  /* ---- boutique art: frame, brand name, model plate and a small pattern beside the footswitch ---- */
+  var SERIF = "font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:700", STENCIL = "font-family:'Stardos Stencil','Big Shoulders Stencil Text',Impact,sans-serif;font-weight:700", BSTEN = "font-family:'Big Shoulders Stencil Text','Stardos Stencil',Impact,sans-serif;font-weight:800";
+  var BR = {
+    drive: { n: "Nocturne", f: SERIF, t: "OVERDRIVE · MK II", m: "OD-1", mf: STENCIL, pat: "stars" },
+    tape: { n: "Tape Garden", f: SERIF, t: "ECHO · BBD", m: "TG-4", mf: STENCIL, pat: "waves" },
+    wah: { n: "WAH WORKS", f: BSTEN, t: "SWEEP FILTER", m: "№ 0412", mf: SERIF, pat: "chev" },
+    swirl: { n: "Swirl & Co.", f: SERIF, t: "CHORUS · FLANGER", m: "SC-5", mf: BSTEN, pat: "spiral" },
+    morph: { n: "Phase+Pulse", f: SERIF, t: "PHASER · TREMOLO", m: "PP-2", mf: STENCIL, pat: "venn" },
+    gate: { n: "GATEKEEPER", f: BSTEN, t: "NOISE GATE", m: "GK-1", mf: SERIF, pat: "bars" },
+    comp: { n: "STUDIO", f: BSTEN, t: "SUSTAIN SERIES", m: "CS-1", mf: SERIF, pat: "funnel" },
+    eq: { n: "SIX BAND", f: BSTEN, t: "GRAPHIC EQ", m: "EQ-6", mf: STENCIL, pat: "eqt" },
+    grain: {}, reverb: {}
+  };
+  function frame(w, h) {
+    function cp(d, c) { return "M" + (d + c) + " " + d + "L" + (w - d - c) + " " + d + "L" + (w - d) + " " + (d + c) + "L" + (w - d) + " " + (h - d - c) + "L" + (w - d - c) + " " + (h - d) + "L" + (d + c) + " " + (h - d) + "L" + d + " " + (h - d - c) + "L" + d + " " + (d + c) + "Z"; }
+    var g = '<path d="' + cp(9, 12) + '" fill="none" stroke="currentColor" stroke-opacity=".42" stroke-width="1.2"/><path d="' + cp(13, 10) + '" fill="none" stroke="currentColor" stroke-opacity=".26" stroke-width=".7"/>';
+    [[9, 21], [w - 9, 21], [9, h - 21], [w - 9, h - 21]].forEach(function (p) { g += dot(p[0], p[1], 1.6, "currentColor", .5); });
+    return g;
+  }
+  function pattern(kind, x, y, w2, h2, r) {
+    var g = "", i, k;
+    if (kind === "stars") { var pts = []; for (i = 0; i < 7; i++) pts.push([x + w2 * (i + 0.5 + (r() - .5) * .5) / 7, y + 4 + r() * (h2 - 8)]); for (i = 0; i < 6; i++) g += line(pts[i][0], pts[i][1], pts[i + 1][0], pts[i + 1][1], .7, .45); pts.forEach(function (p, j) { g += dot(p[0], p[1], j % 3 === 0 ? 2.3 : 1.5, "currentColor", .85); }); }
+    else if (kind === "waves") { for (k = 0; k < 3; k++) { var d = ""; for (i = 0; i <= 40; i++) d += (i ? "L" : "M") + f1(x + w2 * i / 40) + " " + f1(y + h2 / 2 + Math.sin(i * .55 + k) * (h2 / 2 - 2) * (1 - k * .3) * (1 - i / 60)); g += '<path d="' + d + '" fill="none" stroke="currentColor" stroke-opacity="' + (.75 - k * .2) + '" stroke-width="1"/>'; } }
+    else if (kind === "chev") { for (i = 0; i < 7; i++) { var cx = x + 4 + i * (w2 - 8) / 6; g += '<path d="M' + f1(cx - 4) + " " + f1(y + 2) + "L" + f1(cx + 3) + " " + f1(y + h2 / 2) + "L" + f1(cx - 4) + " " + f1(y + h2 - 2) + '" fill="none" stroke="currentColor" stroke-opacity="' + (.35 + i * .09) + '" stroke-width="1.3"/>'; } }
+    else if (kind === "spiral") { var cx2 = x + h2, cy2 = y + h2 / 2, d2 = ""; for (i = 0; i <= 90; i++) { var a = i * .22, rr = 1.2 + i * h2 * .0055; d2 += (i ? "L" : "M") + f1(cx2 + Math.cos(a) * rr * 1.05) + " " + f1(cy2 + Math.sin(a) * rr); } g += '<path d="' + d2 + '" fill="none" stroke="currentColor" stroke-opacity=".7" stroke-width="1.1"/>'; }
+    else if (kind === "venn") { for (i = 0; i < 3; i++) g += circ(x + w2 / 2 + (i - 1) * h2 * .5, y + h2 / 2, h2 / 2 - 1, 1, .6 - i * .1); }
+    else if (kind === "bars") { for (i = 0; i < 14; i++) { var on = i > 3 && i < 10, hh = on ? h2 - 2 : 3; g += '<rect x="' + f1(x + i * w2 / 14) + '" y="' + f1(y + h2 - hh) + '" width="' + f1(w2 / 14 - 2.4) + '" height="' + hh + '" fill="currentColor" fill-opacity="' + (on ? .7 : .35) + '"/>'; } }
+    else if (kind === "funnel") { for (i = 0; i < 5; i++) { var yy = y + i * (h2 / 4), sq = (2 - Math.abs(i - 2)) * 0; g += line(x, yy, x + w2 * .45, y + h2 / 2 + (yy - y - h2 / 2) * .18, .9, .55) + line(x + w2 * .45, y + h2 / 2 + (yy - y - h2 / 2) * .18, x + w2, y + h2 / 2 + (yy - y - h2 / 2) * .18, .9, .55); } }
+    else if (kind === "eqt") { for (i = 0; i < 6; i++) { var xx = x + 6 + i * (w2 - 12) / 5, ph = (r() * .7 + .15) * h2; g += line(xx, y, xx, y + h2, .8, .35) + '<rect x="' + f1(xx - 3.5) + '" y="' + f1(y + ph - 2) + '" width="7" height="4" fill="currentColor" fill-opacity=".8"/>'; } }
+    return g;
+  }
+  function hashId(id) { var hh = 7, i; for (i = 0; i < id.length; i++) hh = (hh * 31 + id.charCodeAt(i)) % 2147483000; return hh + 3; }
+  function brand(id, sec, w, h) {
+    var B = BR[id]; if (!B) return "";
+    var g = frame(w, h), fs = sec.querySelector(".fs"), r = rnd(hashId(id) + 7);
+    if (!B.n || !fs || fs.offsetParent === null) return g;
+    var q = rel(sec, fs), L = q.cx - 78 - 24, R = w - 24 - (q.cx + 78), cy = q.cy;
+    if (L < 70 || R < 60) return g;
+    var sz = Math.max(13, Math.min(24, L / (B.n.length * 0.6)));
+    g += '<text x="24" y="' + f1(cy - 6) + '" font-size="' + f1(sz) + '" fill="currentColor" fill-opacity=".92" style="' + B.f + ';letter-spacing:.02em">' + B.n.replace(/&/g, "&amp;") + "</text>";
+    g += txt(24, cy + 10, B.t, 7.5, 0.7, "start", ' letter-spacing="1.3"');
+    g += pattern(B.pat, 24, cy + 20, Math.min(L, 120), 22, r);
+    g += '<text x="' + f1(w - 24) + '" y="' + f1(cy - 2) + '" font-size="20" text-anchor="end" fill="currentColor" fill-opacity=".9" style="' + B.mf + ';letter-spacing:.06em">' + B.m + "</text>";
+    g += '<rect x="' + f1(w - 24 - Math.min(R, 96)) + '" y="' + f1(cy + 10) + '" width="' + f1(Math.min(R, 96)) + '" height="20" rx="3" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1"/>' + txt(w - 24 - Math.min(R, 96) / 2, cy + 24, "TRUE BYPASS", 7.5, 0.75, "middle", ' letter-spacing="1.2"');
+    return g;
+  }
   function renderPlate(d) {
     var sec = document.getElementById("ped-" + d.id), pl = sec.querySelector(".plate"), w = sec.offsetWidth, h = sec.offsetHeight;
     if (!w || !h) return;
-    pl.innerHTML = '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + " " + h + '">' + DRAW[d.id](sec, w, h) + "</svg>";
+    pl.innerHTML = '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + " " + h + '">' + DRAW[d.id](sec, w, h) + brand(d.id, sec, w, h) + "</svg>";
   }
   var plateT = 0;
   function renderPlates() { cancelAnimationFrame(plateT); plateT = requestAnimationFrame(function () { DEFS.forEach(renderPlate); }); }
@@ -2334,10 +2529,10 @@ body {
   /* ---- faders (EQ) ---- */
   function makeFader(c, host) {
     var w = document.createElement("div"); w.className = "fd";
-    w.innerHTML = '<div class="ftrack"><i class="fcap" role="slider" tabindex="0"></i></div><span class="name"></span><span class="sub"></span>';
+    w.innerHTML = '<i class="fled"></i><div class="ftrack"><i class="fcap" role="slider" tabindex="0"></i></div><span class="name"></span><span class="sub"></span>';
     host.appendChild(w);
     var tr = w.querySelector(".ftrack"), cap = w.querySelector(".fcap"), nm = w.querySelector(".name"), sub = w.querySelector(".sub");
-    function paint(v) { var n = toN(c, v); tr.style.setProperty("--n", n.toFixed(3)); cap.setAttribute("aria-valuenow", v); cap.setAttribute("aria-valuetext", c.fmt(v)); sub.textContent = c.fmt(v); }
+    function paint(v) { var n = toN(c, v); tr.style.setProperty("--n", n.toFixed(3)); cap.setAttribute("aria-valuenow", v); cap.setAttribute("aria-valuetext", c.fmt(v)); sub.textContent = c.fmt(v); w.querySelector(".fled").style.setProperty("--b", Math.min(1, Math.abs(v) / 6).toFixed(2)); if (typeof paintEq === "function") paintEq(); }
     function user(n) { setParam(c.id, fromN(c, n)); saveBoard(); clearPreset(); }
     function at(e) { var r = tr.getBoundingClientRect(); user(1 - (e.clientY - r.top - 11) / (r.height - 22)); }
     var drag = false;
@@ -2482,7 +2677,7 @@ body {
     Object.keys(EXTRA).forEach(function (id) {
       var sec = document.getElementById("ped-" + id), pl = sec.querySelector(".plate"), w = sec.offsetWidth, h = sec.offsetHeight;
       if (!w || !h) return;
-      pl.innerHTML = '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + " " + h + '">' + EXTRA[id](sec, w, h) + "</svg>";
+      pl.innerHTML = '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + " " + h + '">' + EXTRA[id](sec, w, h) + brand(id, sec, w, h) + "</svg>";
     });
   }
   var extraT = 0;
