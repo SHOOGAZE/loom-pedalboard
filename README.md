@@ -3,7 +3,7 @@
 A board of eleven guitar effect pedals that runs in the browser (Web Audio, installable PWA, made for the phone).
 One pedal on screen at a time, black dot-matrix OLED on every pedal, milky plastic body over a PCB, a single red accent.
 
-**Live:** https://shoogaze.github.io/loom/
+**Live:** [https://shoogaze.github.io/loom/](https://shoogaze.github.io/loom-pedalboard/)
 
 ## Pedals
 
