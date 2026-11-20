@@ -3,57 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#14110e">
-<title>fxter</title>
+<meta name="theme-color" content="#1b1c1f">
+<title>LOOM</title>
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="fxter">
+<meta name="apple-mobile-web-app-title" content="LOOM">
 
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>fxter</h1>
+    <h1>LOOM</h1>
   </header>
 
   <nav class="chain" aria-label="Effects chain">
     <p class="chain-cap">Signal chain: source on the left, then in order. Drag the top bar or use its arrows</p>
     <div class="rail" id="rail" role="list"></div>
     <p class="chain-note" id="chainNote" role="status"></p>
+    <button class="vmode" id="viewMode" type="button" aria-pressed="false">Screens: full</button>
+    <button class="vmode" id="bodyMode" type="button" aria-pressed="false">Body: white</button>
   </nav>
 
-  <section class="pedal p1 theme-cream" id="ped-grain" aria-label="Granular processor">
+  <section class="pedal p1 theme-cream" id="ped-grain" aria-label="Audio source">
     <div class="jacks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <div class="plate" aria-hidden="true"></div>
-    <div class="bp-head"><h2 class="bp-title">Grain</h2><p class="bp-sub">Granular processor</p></div>
+    <div class="bp-head"><h2 class="bp-title">Source</h2><p class="bp-sub">Track, demo loop, looper</p></div>
     <div class="p1-grid">
       <div>
         <div class="window screen">
-          <canvas id="wave" class="wave" aria-label="Waveform. Drag to pick the grain position"></canvas>
-          <div class="screen-foot"><span id="srcName">Demo loop, 8 s</span><span id="grainInfo">grains: 0</span></div>
+          <canvas id="wave" class="wave" aria-label="Waveform of the loaded sound"></canvas>
+          <div class="screen-foot"><span id="srcName">Demo loop, 8 s</span></div>
         </div>
-        <div class="rowbox"><p class="rowcap">Source</p><div class="knobs" id="knobs1a"></div></div>
-        <div class="rowbox"><p class="rowcap">Texture</p><div class="knobs" id="knobs1b"></div></div>
-        <div class="rowbox"><p class="rowcap">Motion and echo</p><div class="knobs" id="knobs1c"></div></div>
       </div>
       <div class="p1-right">
-        <div class="groups">
-          <fieldset class="grp"><legend>Mosaic</legend><div role="radiogroup" aria-label="Presets, mosaic" id="presetsA"></div></fieldset>
-          <fieldset class="grp"><legend>Grains</legend><div role="radiogroup" aria-label="Presets, grains" id="presetsB"></div></fieldset>
-          <fieldset class="grp"><legend>Glitch</legend><div role="radiogroup" aria-label="Presets, glitch" id="presetsC"></div></fieldset>
-          <fieldset class="grp"><legend>Echo</legend><div role="radiogroup" aria-label="Presets, echo" id="presetsD"></div></fieldset>
-        </div>
         <div class="master-row">
           <div id="masterHost"></div>
-          <div>
-            <div class="tiles" id="tiles" aria-hidden="true"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
-            <div class="sub tiles-cap">where grains come from</div>
-          </div>
         </div>
       </div>
     </div>
@@ -84,7 +73,7 @@
         <div class="hexw"><div class="hex"><button class="fs" id="play" type="button" aria-label="Play or stop" aria-pressed="false"></button></div></div>
         <span class="led" id="playLed"></span>
       </div>
-      <div class="mark"><i></i>Grain</div>
+      <div class="mark"><i></i>Source</div>
       <div class="fswrap">
         <div><span class="name">Demo</span><span class="sub">demo loop</span></div>
         <div class="hexw"><div class="hex"><button class="fs" id="demo" type="button" aria-label="Load demo loop"></button></div></div>
@@ -144,7 +133,7 @@
 
 <button class="dkped" id="dkPedals" type="button" aria-expanded="false" aria-controls="rail">Pedals ▾</button>
 <div class="pager" id="pager" role="tablist" aria-label="Pedals"></div>
-<div class="dock" role="toolbar" aria-label="Sound control"><button id="dkPlay" type="button" aria-pressed="false">▶ Play</button><button id="dkLoad" type="button">♪ Song</button><button id="dkMode" type="button" aria-pressed="false" title="Source: grains or clean track">Grains</button><button id="dkLive" type="button" aria-pressed="false">Input</button><button id="dkRec" type="button" aria-pressed="false">● Record</button><span class="dkinfo" id="dkInfo" aria-live="polite"></span></div>
-<script src="js/app.js" defer></script>
+<div class="dock" role="toolbar" aria-label="Sound control"><button id="dkPlay" type="button" aria-pressed="false">▶ Play</button><button id="dkLoad" type="button">♪ Song</button><button id="dkLive" type="button" aria-pressed="false">Input</button><button id="dkRec" type="button" aria-pressed="false">● Record</button><span class="dkinfo" id="dkInfo" aria-live="polite"></span></div>
+<script src="js/app.js"></script>
 </body>
 </html>

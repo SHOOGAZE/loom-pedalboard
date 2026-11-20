@@ -1,39 +1,82 @@
-# fxter
+# LOOM
 
-A board of guitar and sound effect pedals that runs in the browser. Eleven pedals, one at a time: Grain, Tail (reverb), Comp, Drive, Gate, Wah, Morph, Swirl, EQ, Tape and a Scope/tuner. Every pedal has a black pixel OLED that shows what the effect is doing, live.
+A board of eleven guitar effect pedals that runs in the browser (Web Audio, installable PWA, made for the phone).
+One pedal on screen at a time, black dot-matrix OLED on every pedal, milky plastic body over a PCB, a single red accent.
 
-Built with plain HTML, CSS and JavaScript and the Web Audio API. No framework, no dependencies, no build step needed to run it.
+**Live:** https://shoogaze.github.io/loom/
 
-## Run
+## Pedals
 
-Open the published page, or serve the folder locally:
+| | |
+|---|---|
+| **Source** | track file, guitar / piano demo loop, looper |
+| **Comp** | compressor with a live curve screen |
+| **Drive** | overdrive / distortion / fuzz |
+| **Gate** | noise gate |
+| **Wah** | filter / wah / auto-sweep |
+| **Morph** | phaser, tremolo, ring modulator |
+| **Swirl** | chorus, flanger, vibrato |
+| **EQ** | six bands |
+| **Tape** | tape echo with wear |
+| **Tail** | reverb, ten types |
+| **Scope** | output spectrum and tuner |
 
-    python3 -m http.server
+Swipe or use the pager to switch pedals; the keypad button opens the signal chain.
 
-then open `http://localhost:8000`. On iPhone use Share, then Add to Home Screen to install it as an app. It works offline after the first visit.
+## Looks
 
-## GitHub Pages
+Two switches live in the chain sheet:
 
-Upload the whole folder (keep `css/`, `js/` and `icons/` next to `index.html`), then Settings, Pages, deploy from the `main` branch root.
-
-## Layout
-
-    index.html            markup only
-    css/style.css         styles (built from src/css)
-    js/app.js             application (built from src/js)
-    sw.js, manifest.webmanifest   offline and install
-    icons/, screenshots/
-    src/                  the same code split into sectors
-    pack.py               joins the sectors into css/style.css and js/app.js
-
-The JavaScript sectors share one scope, so they work only joined. After editing `src/`, run `python3 pack.py`.
+- **Screens: full / simple** - full is the dot-matrix OLED with glare and the PCB under the plastic; simple is plain dark glass with smooth lines and no board (lighter on the phone).
+- **Body: white / tint** - optional pastel tint per pedal.
 
 ## Screenshots
 
-| Grain | Comp | Drive |
+| Source | Comp | Drive |
 |---|---|---|
-| ![](screenshots/01-grain.png) | ![](screenshots/02-comp.png) | ![](screenshots/03-drive.png) |
+| ![](screens/source.png) | ![](screens/comp.png) | ![](screens/drive.png) |
+
+| Gate | Wah | Morph |
+|---|---|---|
+| ![](screens/gate.png) | ![](screens/wah.png) | ![](screens/morph.png) |
+
+| Swirl | EQ | Tape |
+|---|---|---|
+| ![](screens/swirl.png) | ![](screens/eq.png) | ![](screens/tape.png) |
+
+| Tail | Scope | Simple screens |
+|---|---|---|
+| ![](screens/tail.png) | ![](screens/scope.png) | ![](screens/simple-drive.png) |
+
+Body tint:
+
+| Comp | Drive | Tape |
+|---|---|---|
+| ![](screens/tint-comp.png) | ![](screens/tint-drive.png) | ![](screens/tint-tape.png) |
+
+## Run
+
+No build step. Serve the folder over HTTP (audio and the PWA need it), for example:
+
+```
+python3 -m http.server 8000
+```
+
+then open http://localhost:8000. On GitHub Pages just publish the repo root.
+On iPhone: Share, then Add to Home Screen.
+
+## Structure
+
+```
+index.html            markup
+css/style.css         styles
+js/app.js             audio engine and interface
+font/fxpixel.ttf      5x7 pixel font used for titles and screens
+icons/                app icons
+manifest.webmanifest  PWA manifest
+screens/              screenshots
+```
 
 ## License
 
-MIT, see `LICENSE`.
+MIT, (c) Kirill Kinderhart
