@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b1c1f">
+<title>LOOM</title>
+<link rel="apple-touch-icon" href="{{ASSET:0}}">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ASSET:1}}">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LOOM">
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>{{FILE:style.css}}{{FILE:../shared/ziiion-core.css}}</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>LOOM</h1>
+  </header>
+
+  <nav class="chain" aria-label="Effects chain">
+    <p class="chain-cap">Signal chain: source on the left, then in order. Drag the top bar or use its arrows</p>
+    <div class="rail" id="rail" role="list"></div>
+    <p class="chain-note" id="chainNote" role="status"></p>
+    <button class="vmode" id="viewMode" type="button" aria-pressed="false">Screens: full</button>
+    <button class="vmode" id="bodyMode" type="button" aria-pressed="false">Body: white</button>
+    <button class="vmode" id="boardMode" type="button" aria-pressed="true">Board: multi</button>
+  </nav>
+
+  <section class="pedal p1 theme-cream" id="ped-grain" aria-label="Audio source">
+    <div class="jacks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="plate" aria-hidden="true"></div>
+    <div class="bp-head"><h2 class="bp-title">Source</h2><p class="bp-sub">Track, demo loop, looper</p></div>
+    <div class="p1-grid">
+      <div>
+        <div class="window screen">
+          <canvas id="wave" class="wave" aria-label="Waveform of the loaded sound"></canvas>
+          <div class="screen-foot"><span id="srcName">Demo loop, 8 s</span></div>
+        </div>
+      </div>
+      <div class="p1-right">
+        <div class="master-row">
+          <div id="masterHost"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tools">
+      <fieldset class="grp"><legend>Looper</legend>
+        <div class="trow">
+          <button class="key" id="loopMain" type="button"><span class="led" id="loopLed"></span><span id="loopTxt">Record</span></button>
+          <button class="key" id="loopStop" type="button"><span class="led"></span>Stop</button>
+          <button class="key" id="loopClear" type="button"><span class="led"></span>Erase</button>
+          <button class="key" id="loopRev" type="button" aria-pressed="false"><span class="led"></span>Reverse</button>
+        </div>
+        <div class="trow" style="flex-wrap:nowrap"><div style="flex:1;min-width:0"><div class="bar"><i id="loopBar"></i></div><div class="sub" id="loopInfo">empty</div></div><div id="loopKnob" style="width:78px;flex:none"></div></div>
+      </fieldset>
+      <fieldset class="grp"><legend>Tempo</legend>
+        <div class="trow"><button class="key" id="tapBtn" type="button"><span class="led" id="tapLed"></span>Tap</button><div class="bpm"><span id="bpmVal">---</span><span class="sub">BPM · key T</span></div></div>
+        <div class="trow" id="subdivs" role="radiogroup" aria-label="Division"></div>
+      </fieldset>
+      <fieldset class="grp"><legend>My presets</legend>
+        <div class="trow" id="slots"></div>
+        <div class="trow"><button class="key" id="saveMode" type="button" aria-pressed="false"><span class="led"></span>Save</button><span class="sub" id="slotInfo">pick a slot</span></div>
+      </fieldset>
+    </div>
+
+    <div class="fsrow">
+      <div class="fswrap">
+        <div><span class="name">Play</span><span class="sub" id="playSub">start / stop</span></div>
+        <div class="hexw"><div class="hex"><button class="fs" id="play" type="button" aria-label="Play or stop" aria-pressed="false"></button></div></div>
+        <span class="led" id="playLed"></span>
+      </div>
+      <div class="mark"><i></i>Source</div>
+      <div class="fswrap">
+        <div><span class="name">Demo</span><span class="sub">demo loop</span></div>
+        <div class="hexw"><div class="hex"><button class="fs" id="demo" type="button" aria-label="Load demo loop"></button></div></div>
+        <span class="led" style="visibility:hidden"></span>
+      </div>
+      <div class="fswrap">
+        <div><span class="name">Sound</span><span class="sub">load file</span></div>
+        <label class="filefs"><div class="hexw"><div class="hex"><span class="fs"></span></div></div><input id="file" type="file" accept="audio/*,.mp3,.wav,.m4a,.aac,.ogg,.flac" aria-label="Load audio file"></label>
+        <span class="led" style="visibility:hidden"></span>
+      </div>
+    </div>
+    <div class="status" id="status" role="status"></div>
+  </section>
+
+  <section class="pedal p2 theme-cosmic" id="ped-reverb" aria-label="Reverberation">
+    <div class="jacks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="plate" aria-hidden="true"></div>
+    <div class="bp-head"><h2 class="bp-title">Tail</h2><p class="bp-sub">Reverberation</p></div>
+    <div class="p2-grid">
+      <div>
+        <div class="window lcd" aria-live="polite">
+          <div class="lcd-text"><div class="cap" id="dispCap">Type</div><div class="val" id="dispVal">Plate</div></div>
+          <canvas id="irCv" class="irc" width="26" height="14" aria-hidden="true"></canvas>
+        </div>
+        <p class="padlab">Reverb type</p>
+        <div class="sel" id="sel" role="radiogroup" aria-label="Reverb type"><button class="selknob" id="selKnob" type="button" aria-label="Next reverb type"></button></div>
+      </div>
+      <div>
+        <p class="advlab" style="margin-top:0">Tail</p>
+        <div class="knobs" id="knobs2a"></div>
+        <p class="advlab">Type and modulation</p>
+        <div class="knobs" id="knobs2b"></div>
+        <p class="advlab">Advanced</p>
+        <div class="knobs six" id="knobs3"></div>
+      </div>
+    </div>
+    <div class="fsrow">
+      <div class="fswrap">
+        <div><span class="name">Reverb</span><span class="sub" id="revSub">on</span></div>
+        <div class="hexw"><div class="hex"><button class="fs" id="revSw" type="button" aria-pressed="true" aria-label="Turn reverb on or off"></button></div></div>
+        <span class="led on" id="revLed"></span>
+      </div>
+      <div class="fswrap">
+        <div><span class="name">Freeze</span><span class="sub" id="frzSub">off</span></div>
+        <div class="hexw"><div class="hex"><button class="fs" id="frzSw" type="button" aria-pressed="false" aria-label="Freeze the reverb tail"></button></div></div>
+        <span class="led" id="frzLed"></span>
+      </div>
+      <div class="mark"><i></i>Tail</div>
+      <div class="fswrap">
+        <div><span class="name">Reset</span><span class="sub">type settings</span></div>
+        <div class="hexw"><div class="hex"><button class="fs" id="rstSw" type="button" aria-label="Reset reverb settings"></button></div></div>
+        <span class="led" style="visibility:hidden"></span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<button class="dkped" id="dkPedals" type="button" aria-expanded="false" aria-controls="rail">Pedals ▾</button>
+<div class="pager" id="pager" role="tablist" aria-label="Pedals"></div>
+<div class="dock" role="toolbar" aria-label="Sound control"><button id="dkPlay" type="button" aria-pressed="false">▶ Play</button><button id="dkLoad" type="button">♪ Song</button><button id="dkLive" type="button" aria-pressed="false">Input</button><button id="dkRec" type="button" aria-pressed="false">● Record</button><span class="dkinfo" id="dkInfo" aria-live="polite"></span></div>
+<script>{{FILE:app.js}}</script>
+<script>{{FILE:sw-register.js}}</script>
+</body>
+</html>
